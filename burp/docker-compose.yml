@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+    burp:
+        build: .
+        ports:
+        - "8080:8080"
+        
+        volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix
+        - ${HOME}/hacked_burp/burp:/root/
+
+        devices:
+        - "/dev/snd"
+        
+        environment:
+        - DISPLAY=unix${DISPLAY}
+
+        command: java -jar /root/start_burp.jar
