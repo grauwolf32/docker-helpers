@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ ! -d "${HOME}/.MobSF" ]; then
+	mkdir ${HOME}/.MobSF
+fi
+
+sudo docker run -it -p 8000:8000 -v ${HOME}/.MobSF/:/root/.MobSF/ opensecurity/mobile-security-framework-mobsf:latest
+
