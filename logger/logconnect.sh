@@ -10,6 +10,8 @@ if [ -z $(echo $1 | grep -E "^[0-9]+$") ]; then
 	exit 1;
 fi
 
+echo "$$" >> run.pids
+
 while true; do
 	nc -v -l -p $1 2>&1 | tee -a $2;
         echo "-------------------------" | tee -a $2;
