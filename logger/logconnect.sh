@@ -1,4 +1,6 @@
-if [ -z $1  || -z $2 ]; then
+#!/bin/bash
+
+if [ -z $2 ]; then
 	echo "Usage $0 port:num logfile:str";
 	exit 1;
 fi
@@ -8,8 +10,8 @@ if [ -z $(echo $1 | grep -E "^[0-9]+$") ]; then
 	exit 1;
 fi
 
-while True; do
-	nc -v -l -p $1 >> $2;
-        echo "-------------------------";
+while true; do
+	nc -v -l -p $1 2>&1 | tee -a $2;
+        echo "-------------------------" | tee -a $2;
 done
 
