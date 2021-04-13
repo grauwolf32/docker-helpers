@@ -1,0 +1,24 @@
+<?php
+    if(isset($_SERVER["HTTP_X_REAL_IP"])){
+        echo $_SERVER["HTTP_X_REAL_IP"];
+    } else{
+        echo $_SERVER["REMOTE_ADDR"];
+    }
+?>
+
+server {
+        root /var/www/html;
+        client_max_body_size 150m;
+        index index.html index.htm index.nginx-debian.html;
+
+        listen 80;
+        server_name grauwolf32.cc;
+        location /ip/ {
+		rewrite ^/(.*)$ /ip.php;
+	}
+
+	location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+    }
+}
